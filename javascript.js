@@ -103,14 +103,6 @@
             });
         });
 
-        // Form submission
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            // Add your form submission logic here
-            alert('Message sent! We\'ll get back to you soon.');
-            this.reset();
-        });
-
         // Initialize particles
         createParticles();
 
@@ -289,4 +281,171 @@
             });
 
             updateCarousel();
+        });
+
+        // Contact Form Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if EmailJS is loaded
+            if (typeof emailjs === 'undefined') {
+                console.error('EmailJS is not loaded! Make sure the script is included in HTML.');
+                return;
+            } else {
+                console.log('EmailJS is loaded successfully');
+            }
+
+            const contactForm = document.getElementById('contactForm');
+            if (!contactForm) {
+                console.error('Contact form not found!');
+                return;
+            }
+
+            const submitBtn = contactForm.querySelector('.submit-btn');
+            const originalBtnText = submitBtn.textContent;
+
+            // Simple notification function
+            function showNotification(message, type = 'success') {
+                // Remove existing notifications
+                const existingNotification = document.querySelector('.form-notification');
+                if (existingNotification) {
+                    existingNotification.remove();
+                }
+
+                const notification = document.createElement('div');
+                notification.className = `form-notification ${type}`;
+                notification.innerHTML = `
+                    <div class="notification-content">
+                        <span class="notification-icon">${type === 'success' ? '✅' : '❌'}</span>
+                        <span class="notification-message">${message}</span>
+                        <button class="notification-close" onclick="this.parentElement.parentElement.remove()">×</button>
+                    </div>
+                `;
+                
+                // Insert notification before the form
+                contactForm.parentNode.insertBefore(notification, contactForm);
+                
+                // Auto-remove after 5 seconds
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.remove();
+                    }
+                }, 5000);
+            }
+
+            // Loading state function
+            function setLoadingState(loading) {
+                if (loading) {
+                    submitBtn.innerHTML = `
+                        <span class="loading-spinner"></span>
+                        Sending...
+                    `;
+                    submitBtn.disabled = true;
+                } else {
+                    submitBtn.textContent = originalBtnText;
+                    submitBtn.disabled = false;
+                }
+            }
+
+            // Main form submission handler
+            contactForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                console.log('Form submission started...');
+                
+                // Get form values directly from inputs
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const subject = document.getElementById('subject').value.trim();
+                const message = document.getElementById('message').value.trim();
+                
+                console.log('Form values:', { name, email, subject, message });
+                
+                // Simple validation
+                if (!name || name.length < 2) {
+                    showNotification('Please enter a valid name (at least 2 characters)', 'error');
+                    return;
+                }
+                
+                if (!email || !email.includes('@') || !email.includes('.')) {
+                    showNotification('Please enter a valid email address', 'error');
+                    return;
+                }
+                
+                if (!subject || subject.length < 3) {
+                    showNotification('Please enter a subject (at least 3 characters)', 'error');
+                    return;
+                }
+                
+                if (!message || message.length < 5) {
+                    showNotification('Please enter a message (at least 5 characters)', 'error');
+                    return;
+                }
+
+                console.log('Validation passed, sending email...');
+                setLoadingState(true);
+
+                try {
+                    // Initialize EmailJS
+                    console.log('Initializing EmailJS with key: XDjsAsSSH82Fc4z4C');
+                    emailjs.init("XDjsAsSSH82Fc4z4C");
+                    
+                    const emailData = {
+                        from_name: name,
+                        from_email: email,
+                        subject: subject,
+                        message: message,
+                        to_email: 'skniraj7494@gmail.com',
+                        reply_to: email
+                    };
+                    
+                    console.log('Sending email with data:', emailData);
+                    console.log('Using service: service_jewg9sp');
+                    console.log('Using NEW template: template_c55f9gc');
+                    
+                    const result = await emailjs.send(
+                        'service_jewg9sp',
+                        'template_c55f9gc',
+                        emailData
+                    );
+                    
+                    console.log('Email sent successfully:', result);
+                    console.log('Result status:', result.status);
+                    console.log('Result text:', result.text);
+                    
+                    showNotification('Thank you for your message! We will get back to you soon.', 'success');
+                    contactForm.reset();
+                    
+                    console.log('Email sent successfully:', result);
+                    console.log('Result status:', result.status);
+                    console.log('Result text:', result.text);
+                    
+                    showNotification('Thank you for your message! We will get back to you soon.', 'success');
+                    contactForm.reset();
+                    
+                } catch (error) {
+                    console.error('Full error object:', error);
+                    console.error('Error message:', error.message);
+                    console.error('Error status:', error.status);
+                    console.error('Error text:', error.text);
+                    
+                    let errorMsg = 'Sorry, there was an error sending your message. ';
+                    
+                    if (error.status === 400) {
+                        errorMsg += 'Please check your EmailJS configuration.';
+                    } else if (error.status === 401) {
+                        errorMsg += 'EmailJS authentication failed.';
+                    } else if (error.status === 402) {
+                        errorMsg += 'EmailJS quota exceeded.';
+                    } else if (error.status === 403) {
+                        errorMsg += 'EmailJS access forbidden.';
+                    } else if (error.status === 404) {
+                        errorMsg += 'EmailJS service or template not found.';
+                    } else {
+                        errorMsg += 'Please try again or contact us directly.';
+                    }
+                    
+                    showNotification(errorMsg, 'error');
+                } finally {
+                    setLoadingState(false);
+                }
+            });
         });

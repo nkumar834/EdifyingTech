@@ -877,6 +877,126 @@
             box-shadow: 0 10px 30px rgba(255, 94, 0, 0.5);
         }
 
+        /* Form Notifications */
+        .form-notification {
+            margin-bottom: 30px;
+            border-radius: 10px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid;
+            animation: slideInDown 0.5s ease-out;
+        }
+
+        .form-notification.success {
+            background: rgba(34, 197, 94, 0.1);
+            border-color: #22c55e;
+            color: #22c55e;
+        }
+
+        .form-notification.error {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: #ef4444;
+            color: #ef4444;
+        }
+
+        .notification-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .notification-icon {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .notification-message {
+            flex: 1;
+            line-height: 1.6;
+        }
+
+        .notification-close {
+            background: none;
+            border: none;
+            color: inherit;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .notification-close:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 2px solid #ffffff;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes slideInDown {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Form Field Validation */
+        .form-group input.error,
+        .form-group textarea.error {
+            border-color: #ef4444;
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+            background: rgba(239, 68, 68, 0.05);
+        }
+
+        .field-error {
+            color: #ef4444;
+            font-size: 0.9rem;
+            margin-top: 8px;
+            padding-left: 5px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Submit Button Disabled State */
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .submit-btn:disabled:hover {
+            transform: none;
+            box-shadow: 0 0 20px rgba(255, 94, 0, 0.3);
+        }
+
         .contact-info {
             padding: 40px;
         }
@@ -1186,6 +1306,265 @@
             .shape-triangle,
             .shape-square {
                 transform: scale(0.6);
+            }
+        }
+
+        /* Careers Section */
+        .careers {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .careers-content {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+        }
+
+        .careers-intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .job-opportunity {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 94, 0, 0.2);
+            border-radius: 15px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 40px rgba(255, 94, 0, 0.1);
+        }
+
+        .opportunity-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .opportunity-header h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #FF5E00, #00B2FF);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .opportunity-badges {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge.internship {
+            background: linear-gradient(45deg, #FF5E00, #00B2FF);
+            color: white;
+        }
+
+        .badge.duration {
+            background: rgba(0, 178, 255, 0.2);
+            color: #00B2FF;
+            border: 1px solid #00B2FF;
+        }
+
+        .badge.location {
+            background: rgba(255, 94, 0, 0.2);
+            color: #FF5E00;
+            border: 1px solid #FF5E00;
+        }
+
+        .opportunity-content {
+            display: grid;
+            gap: 40px;
+        }
+
+        .opportunity-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .detail-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 94, 0, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .detail-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 94, 0, 0.2);
+        }
+
+        .detail-box h3 {
+            color: #FF5E00;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .stipend {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #00B2FF;
+        }
+
+        .opportunity-description h3 {
+            color: #FF5E00;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .opportunity-description p {
+            line-height: 1.8;
+            opacity: 0.8;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .roles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .role-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 178, 255, 0.3);
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .role-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 178, 255, 0.2);
+            border-color: #00B2FF;
+        }
+
+        .role-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .role-card h4 {
+            color: #00B2FF;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .role-card p {
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .requirements-benefits {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 40px 0;
+        }
+
+        .requirements, .benefits {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 94, 0, 0.2);
+            border-radius: 10px;
+            padding: 30px;
+        }
+
+        .requirements h3, .benefits h3 {
+            color: #FF5E00;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .apply-section {
+            text-align: center;
+            background: linear-gradient(45deg, rgba(255, 94, 0, 0.1), rgba(0, 178, 255, 0.1));
+            border: 1px solid rgba(255, 94, 0, 0.3);
+            border-radius: 15px;
+            padding: 40px;
+            margin-top: 40px;
+        }
+
+        .apply-section h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #ffffff, #FF5E00);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .apply-section p {
+            margin-bottom: 30px;
+            opacity: 0.8;
+            font-size: 1.1rem;
+        }
+
+        .apply-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Responsive Design for Careers */
+        @media (max-width: 768px) {
+            .careers-intro {
+                grid-template-columns: 1fr;
+            }
+            
+            .opportunity-badges {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .opportunity-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .roles-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .requirements-benefits {
+                grid-template-columns: 1fr;
+            }
+            
+            .apply-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .apply-buttons .cta-button {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .opportunity-header h2 {
+                font-size: 1.8rem;
             }
         }
 

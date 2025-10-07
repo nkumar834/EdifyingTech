@@ -1,0 +1,39 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Brave against localhost",
+            "url": "http://localhost:8080",
+            "webRoot": "${workspaceFolder}",
+            "runtimeExecutable": "brave-browser"
+        }
+    ]
+}
+
+<!-- Navigation -->
+<nav id="navbar">
+    <div class="nav-container">
+        <a href="#home" class="logo-link">
+            <img src="logo.png" alt="Edifying Tech Logo" class="logo-img" />
+            <span class="logo-text">EDIFYING TECH<br> <h6>CONSULTANCY LLP.</h6></span>
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home" class="nav-link">Home</a></li>
+            <li><a href="#features" class="nav-link">Services</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#careers" class="nav-link">Careers</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</nav>
